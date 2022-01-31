@@ -1,0 +1,61 @@
+C51 COMPILER V9.53.0.0   LCD_0_99                                                          12/20/2018 14:49:45 PAGE 1   
+
+
+C51 COMPILER V9.53.0.0, COMPILATION OF MODULE LCD_0_99
+OBJECT MODULE PLACED IN LCD_0-99.OBJ
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE LCD_0-99.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND TABS(2)
+
+line level    source
+
+   1          #include<reg51.h>
+   2          #include "8051_delay.h"
+   3          #include "LCD_4_BIT_HEADER_FILE.h"
+   4          
+   5          int Count,i;
+   6          
+   7          void divider(int x)
+   8          {
+   9   1        int Temp,Dig1,Dig2;
+  10   1        
+  11   1        Temp = x;
+  12   1      
+  13   1        Dig1 = Temp/10;
+  14   1        Lcd_Data(Dig1+48);
+  15   1      
+  16   1        Dig2 = Temp%10;
+  17   1        Lcd_Data(Dig2+48);
+  18   1      }
+  19          
+  20          void main()
+  21          {
+  22   1        P1=0X00;
+  23   1      
+  24   1        Lcd_Intialization();
+  25   1      
+  26   1        Lcd_Command(0x80);
+  27   1        Lcd_String("LYCO SOFT");
+  28   1        
+  29   1        while(1)
+  30   1        {
+  31   2          for(i=0;i<100;i++)
+  32   2          {
+  33   3            Lcd_Command(0xc0);
+  34   3            divider(i);
+  35   3            delay(500);
+  36   3          }
+  37   2        }
+  38   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    262    ----
+   CONSTANT SIZE    =     10    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      4       3
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
